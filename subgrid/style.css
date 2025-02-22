@@ -6,7 +6,12 @@ body {
 .card-grid {
   display: grid; /* 使用 Grid 佈局 */
   gap: 2rem; /* 設定格子之間的間距為 2rem */
-  grid-template-columns: 1fr 1fr; /* 兩欄等寬 */
+  grid-template-columns:
+    minmax(6ch, 20ch)
+    1fr
+    minmax(6ch, 20ch)
+    1fr;
+  /* 4 欄，第一欄最小 6ch 最大 20ch，第二欄自適應，第三欄最小 6ch 最大 20ch，第四欄自適應 */
 
   /* 其他樣式 */
   width: min(90%, 60rem); /* 寬度最小為 90% 或最大 60rem（取較小值） */
@@ -15,7 +20,12 @@ body {
 
 .card {
   display: grid; /* 讓卡片內部也使用 Grid */
-  grid-template-columns: minmax(6ch, 20ch) 1fr; /* 兩列，第一列範圍 6ch ~ 20ch，第二列自適應 */
+
+  /*改用 subgrid*/
+  grid-column: 2 span; /* 跨越 2 欄 */
+  grid-template-columns: subgrid; /* 子 Grid 繼承父 Grid 的欄位 */
+
+  /* grid-template-columns: minmax(6ch, 20ch) 1fr; 兩列，第一列範圍 6ch ~ 20ch，第二列自適應 */
   grid-template-rows: min-content 1fr; /* 兩行，第一行最小內容高度，第二行填滿剩餘空間 */
   gap: 1em; /* 內部間距 1em */
   border: 3px solid black; /* 設定黑色邊框 */
